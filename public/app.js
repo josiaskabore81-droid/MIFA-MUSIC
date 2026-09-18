@@ -1,3 +1,4 @@
+const API_BASE = 'https://mifa-music.onrender.com';
 const state = {
   currentTrack: null,
   tracks: [],
