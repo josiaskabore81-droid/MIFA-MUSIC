@@ -22,7 +22,7 @@ jobs:
       - name: Setup Android
         uses: android-actions/setup-android@v4
         with:
-          packages: ''
+          packages: platform-tools
 
       - name: Install Android SDK
         run: |
