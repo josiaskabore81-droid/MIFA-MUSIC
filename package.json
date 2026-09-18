@@ -1,0 +1,20 @@
+{
+  "name": "mifa-music",
+  "version": "1.0.0",
+  "description": "MIFA Music - plateforme web musicale",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@capacitor-community/media": "^9.1.0",
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/cli": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "axios": "^1.20.0",
+    "dotenv": "^17.4.2",
+    "express": "^5.1.0",
+    "multer": "^2.0.2"
+  }
+}
