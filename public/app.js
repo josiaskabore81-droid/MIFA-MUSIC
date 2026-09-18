@@ -32,7 +32,7 @@ function normalizePhoneTrack(track) {
     artist: track.artist || "Artiste inconnu",
     album: track.album || "Album inconnu",
     image: "assets/default-cover.png",
-    audio: track.audio,
+    audio: new URL(track.audio, API_BASE).href,
     duration: Number(track.duration || 0),
     local: true,
     source: "Téléphone"
@@ -89,7 +89,7 @@ function playTrack(track) {
     return;
   }
 
-  audio.src = track.audio;
+  audio.src = new URL(track.audio, API_BASE).href;
   audio.load();
 
   audio.play().catch(error => {
