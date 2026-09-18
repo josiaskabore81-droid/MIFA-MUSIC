@@ -146,7 +146,7 @@ function renderTrackCard(track) {
         <img src="${escapeHtml(track.image || "assets/default-cover.png")}"
              onerror="this.src='assets/default-cover.png'">
 
-        <button class="play-card" onclick='playTrack(${JSON.stringify(track)})'>
+        <button class="play-card" data-action="play" data-track-id="${escapeHtml(track.id)}">
           ▶
         </button>
       </div>
@@ -157,7 +157,8 @@ function renderTrackCard(track) {
       </div>
 
       <button class="favorite-btn"
-              onclick='toggleFavorite(${JSON.stringify(track)})'>
+              data-action="favorite"
+              data-track-id="${escapeHtml(track.id)}">
         ${favorite ? "❤️" : "🤍"}
       </button>
     </div>
@@ -252,6 +253,10 @@ async function searchMusic(query) {
             Aucun résultat trouvé.
           </div>
         `;
+
+      if (tracks.length) {
+        setupTrackButtons(results);
+      }
     }
 
   } catch (error) {
@@ -265,6 +270,32 @@ async function searchMusic(query) {
       `;
     }
   }
+}
+
+function setupTrackButtons(container) {
+  if (!container) return;
+
+  container.querySelectorAll('[data-action="play"]').forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.trackId;
+      const track = state.tracks.find(t => String(t.id) === String(id));
+
+      if (track) {
+        playTrack(track);
+      }
+    });
+  });
+
+  container.querySelectorAll('[data-action="favorite"]').forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.trackId;
+      const track = state.tracks.find(t => String(t.id) === String(id));
+
+      if (track) {
+        toggleFavorite(track);
+      }
+    });
+  });
 }
 
 function setupAudio() {
