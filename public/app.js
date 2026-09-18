@@ -223,7 +223,7 @@ async function searchMusic(query) {
 
   try {
     const response = await fetch(
-      `/api/audius?q=${encodeURIComponent(query)}`
+      `https://mifa-music.onrender.com/api/audius?q=${encodeURIComponent(query)}`
     );
 
     if (!response.ok) {
