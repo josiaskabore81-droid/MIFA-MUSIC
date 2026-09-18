@@ -257,6 +257,10 @@ async function searchMusic(query) {
       if (tracks.length) {
         setupTrackButtons(results);
       }
+
+      if (tracks.length) {
+        setupTrackButtons(results);
+      }
     }
 
   } catch (error) {
@@ -270,6 +274,32 @@ async function searchMusic(query) {
       `;
     }
   }
+}
+
+function setupTrackButtons(container) {
+  if (!container) return;
+
+  container.querySelectorAll('[data-action="play"]').forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.trackId;
+      const track = state.tracks.find(t => String(t.id) === String(id));
+
+      if (track) {
+        playTrack(track);
+      }
+    });
+  });
+
+  container.querySelectorAll('[data-action="favorite"]').forEach(button => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.trackId;
+      const track = state.tracks.find(t => String(t.id) === String(id));
+
+      if (track) {
+        toggleFavorite(track);
+      }
+    });
+  });
 }
 
 function setupTrackButtons(container) {
